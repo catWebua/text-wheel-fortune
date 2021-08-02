@@ -1,0 +1,162 @@
+$color-black: black;
+$color-white: white;
+$color-blue: blue;
+$color-yellow: yellow;
+$color-green: green;
+$color-blueviolet: blueviolet;
+$color-salmon: salmon;
+$color-red: red;
+$color-gold: gold;
+
+@mixin mobileSize {
+  @media only screen and (max-width: 425px) {
+    @content;
+  }
+}
+
+@mixin descSize {
+  @media only screen and (min-width: 1441px) and (max-width: 1920px) {
+    @content;
+  }
+}
+
+@mixin bgUpDown {
+  background-color: $color-gold;
+  text-align: center;
+  padding: 25px 0;
+}
+
+@mixin flexBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  @include bgUpDown;
+}
+
+.container-wheel {
+  @include flexBox;
+
+  .container-wheel-arrow {
+    display: flex;
+    align-items: center;
+  }
+
+  .wheel {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 1px solid black;
+    overflow: hidden;
+    background-image: conic-gradient($color-blue 16.67%, $color-yellow 0 33.33%, $color-green 0 50%, $color-blueviolet 0 66.67%, $color-salmon 0 83.33%, $color-red 0);
+    z-index: 99;
+  }
+
+  .arrow {
+    font-size: 25px;
+  }
+
+  .spin {
+    margin: 20px 20px 0 0;
+
+  }
+
+  .popup {
+    position: relative;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 150px;
+    border: 1px solid $color-black;
+    border-radius: 20px;
+    margin: 0 auto;
+    z-index: 999;
+
+    h2 {
+      color: $color-white;
+      border: 1px solid $color-red;
+      background-color: $color-black;
+      padding: 5px;
+    }
+
+    .spin2 {
+      margin-top: 20px;
+    }
+
+    .close {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      cursor: pointer;
+      color: $color-white;
+      background-color: $color-red;
+      border: 1px solid $color-yellow;
+    }
+  }
+
+  .popupbg {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: RGBA(0, 0, 0, .6);
+    z-index: 9;
+  }
+
+  .rotating {
+    transition: all 3s;
+    transition-timing-function: ease-in-out;
+  }
+}
+
+footer {
+  @include bgUpDown;
+}
+
+@include descSize {
+  .container-wheel {
+    .wheel {
+      width: 500px;
+      height: 500px;
+    }
+
+    .arrow {
+      font-size: 50px;
+      margin-left: 20px;
+    }
+
+    .spin {
+      width: 200px;
+      height: 50px;
+    }
+
+    .popup {
+      width: 500px;
+      height: 250px;
+      h2{
+        font-size: 40px;
+      }
+      .spin2 {
+        width: 200px;
+        height: 50px;
+      }
+    }
+
+  }
+}
+
+@include mobileSize {
+  .container-wheel {
+    .popup {
+      position: absolute;
+      top: 0;
+    }
+  }
+}
